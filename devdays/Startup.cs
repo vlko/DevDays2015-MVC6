@@ -20,6 +20,14 @@ namespace devdays
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
             
+            app.Map("/sub", appSub => 
+            {
+                appSub.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("Hello World from sub!");
+                });
+            });
+            
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
