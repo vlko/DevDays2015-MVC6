@@ -24,15 +24,7 @@ namespace devdays
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
             
-            app.UseMvc(routes =>
-            {
-                // route1
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" }
-                );
-            });
+            app.UseMvc();
             
             if (!env.IsDevelopment())
             {
