@@ -7,6 +7,7 @@ using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.Framework.DependencyInjection;
+using Microsoft.AspNet.Hosting;
 
 namespace devdays
 {
@@ -18,7 +19,7 @@ namespace devdays
            services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
@@ -33,8 +34,10 @@ namespace devdays
                 );
             });
             
-            app.UseDeveloperExceptionPage();
-            
+            if (!env.IsDevelopment())
+            {
+               app.UseDeveloperExceptionPage();
+            } 
             app.Run(async (context) =>
             {
                 context.Response.StatusCode = 404;
