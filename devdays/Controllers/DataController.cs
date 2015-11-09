@@ -3,6 +3,7 @@ using Microsoft.AspNet.Mvc;
 
 namespace devdays
 {
+	[Route("api/[controller]")]
 	public class DataController
 	{
 		private static List<int> _data = new List<int>();
@@ -12,6 +13,7 @@ namespace devdays
 			return _data;
 		}
 		
+		[Route("{item:int}")]
 		[HttpGet]
 		public string Add(int item)
 		{
